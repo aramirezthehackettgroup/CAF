@@ -55,7 +55,7 @@ ECHO %message:"=%
 ECHO %message:"=% >> %log_file%
 ECHO Are you sure you want to restart the service instance? (yes/no): [Press Enter] 
 ECHO Are you sure you want to restart the service instance? (yes/no): [Press Enter] >> %log_file%
-CALL %epmautomate_client% resetservice "Reset Service Actual scenario not available" >> %log_file%
+CALL %epmautomate_client% resetservice "Reset Service: " >> %log_file%
 IF %ERRORLEVEL% NEQ 0 ( 
 CALL :ErrorPara %message% %log_file% 
 )
@@ -84,7 +84,7 @@ ECHO ---------------------------------------------------------
 ECHO %DATE% - %TIME% End of process
 ECHO ---------------------------------------------------------
 
-
+REM PAUSE
 EXIT
 
 :ErrorPara 

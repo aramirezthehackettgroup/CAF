@@ -3,8 +3,8 @@
 REM ---------------------------------------------------------
 REM The Hackett Group
 REM Author: rjimenez
-REM Date: AUG 2016
-REM LoadDataPBCS.bat
+REM Date: JUL 2016
+REM ImportMetataPBCS.bat 
 REM ---------------------------------------------------------
 
 SETLOCAL ENABLEDELAYEDEXPANSION
@@ -55,10 +55,10 @@ ECHO.>> %log_file%
 SET message="%date% %time% - Delete File"
 ECHO %message:"=%
 ECHO %message:"=% >> %log_file%
-CALL %epmautomate_client% deletefile inbox/%filename% >> %log_file%
+CALL %epmautomate_client% deletefile %filename% >> %log_file%
 IF %ERRORLEVEL% EQU 0 (
       GOTO:PROCESS
-   ) ELSE IF %ERRORLEVEL% EQU 1 (
+   ) ELSE IF %ERRORLEVEL% EQU 8 (
       ECHO Info: No file to delete in INBOX >> %log_file%
        ECHO Info: No file to delete in INBOX
       GOTO:PROCESS
@@ -66,15 +66,15 @@ IF %ERRORLEVEL% EQU 0 (
        CALL :ErrorPara %message% %log_file% 
        EXIT
    )
-
    
 :PROCESS
+   
 ECHO.
 ECHO.>> %log_file%
 SET message="%date% %time% - Upload File"
 ECHO %message:"=%
 ECHO %message:"=% >> %log_file%
-CALL %epmautomate_client% uploadfile %sourcefiledir%\%filename% inbox >> %log_file%
+CALL %epmautomate_client% uploadfile %sourcefiledir%\%filename% >> %log_file%
 IF %ERRORLEVEL% NEQ 0 ( 
 CALL :ErrorPara %message% %log_file% 
 EXIT )
@@ -82,10 +82,10 @@ ECHO.
 ECHO.>> %log_file%
 
 
-SET message="%date% %time% - Load Data"
+SET message="%date% %time% - Import Medatada"
 ECHO %message:"=%
 ECHO %message:"=% >> %log_file%
-CALL %epmautomate_client% rundatarule %rulename% %startperiod% %endperiod% REPLACE %exportmode%  %filename% >> %log_file%
+CALL %epmautomate_client% importmetadata %jobname% %filename% >> %log_file%
 IF %ERRORLEVEL% NEQ 0 ( 
 CALL :ErrorPara %message% %log_file% 
 REM EXIT
@@ -125,6 +125,7 @@ ECHO Archive file name : %file_base%_%timestamp%.%extn% >> %log_file%
 ECHO.
 ECHO.>> %log_file%
 
+
 SET message="%date% %time% - Logout"
 ECHO ---------------------------------------------------------
 ECHO %message:"=%
@@ -147,9 +148,8 @@ ECHO ---------------------------------------------------------
 ECHO %DATE% - %TIME% End of process
 ECHO ---------------------------------------------------------
 
-REM PAUSE
+PAUSE
 EXIT
-
 
 :ErrorPara 
 ECHO.
@@ -165,6 +165,6 @@ ECHO Logging Out. Go to %url% for details. >> %~2
 ECHO --------------------------------------------------------- >> %~2
 ECHO. >> %~2
 
-powershell %batch_dir%\sendEmail.ps1 -email %email% -attachment %log_file% -rulename %rulename% -url %url%
+powershell %batch_dir%\sendEmail.ps1 -email %email% -attachment %log_file% -jobname %jobname% -url %url%
 
 EXIT

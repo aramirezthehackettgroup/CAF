@@ -51,35 +51,7 @@ EXIT )
 ECHO.
 ECHO.>> %log_file%
 
-CALL:DELETEFILE
 
-
-SET message="%date% %time% - Logout"
-ECHO ---------------------------------------------------------
-ECHO %message:"=%
-ECHO ---------------------------------------------------------
-ECHO --------------------------------------------------------- >> %log_file%
-ECHO %message:"=% >> %log_file%
-ECHO --------------------------------------------------------- >> %log_file%
-CALL %epmautomate_client% logout >> %log_file%
-IF %ERRORLEVEL% NEQ 0 ( 
-CALL :ErrorPara %message% %log_file% 
-EXIT )
-ECHO.
-ECHO.>> %log_file%
-
-ECHO --------------------------------------------------------- >> %log_file%
-ECHO %DATE% - %TIME% End of process>> %log_file%
-ECHO --------------------------------------------------------- >> %log_file%
-
-ECHO ---------------------------------------------------------
-ECHO %DATE% - %TIME% End of process
-ECHO ---------------------------------------------------------
-
-PAUSE
-EXIT
-
-:DELETEFILE
 SET message="%date% %time% - Delete File"
 ECHO %message:"=%
 ECHO %message:"=% >> %log_file%
@@ -153,6 +125,31 @@ ECHO Archive file name : %file_base%_%timestamp%.%extn% >> %log_file%
 ECHO.
 ECHO.>> %log_file%
 
+
+SET message="%date% %time% - Logout"
+ECHO ---------------------------------------------------------
+ECHO %message:"=%
+ECHO ---------------------------------------------------------
+ECHO --------------------------------------------------------- >> %log_file%
+ECHO %message:"=% >> %log_file%
+ECHO --------------------------------------------------------- >> %log_file%
+CALL %epmautomate_client% logout >> %log_file%
+IF %ERRORLEVEL% NEQ 0 ( 
+CALL :ErrorPara %message% %log_file% 
+EXIT )
+ECHO.
+ECHO.>> %log_file%
+
+ECHO --------------------------------------------------------- >> %log_file%
+ECHO %DATE% - %TIME% End of process>> %log_file%
+ECHO --------------------------------------------------------- >> %log_file%
+
+ECHO ---------------------------------------------------------
+ECHO %DATE% - %TIME% End of process
+ECHO ---------------------------------------------------------
+
+PAUSE
+EXIT
 
 :ErrorPara 
 ECHO.

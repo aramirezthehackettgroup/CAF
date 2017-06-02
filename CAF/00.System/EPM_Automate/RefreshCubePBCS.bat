@@ -2,8 +2,8 @@
 
 REM ---------------------------------------------------------
 REM The Hackett Group
-REM Author: Operez
-REM Date: Nov 2016
+REM Author: rjimenez
+REM Date: Oct 2016
 REM RefreshCubePBCS.bat 
 REM ---------------------------------------------------------
 
@@ -82,6 +82,7 @@ ECHO ---------------------------------------------------------
 ECHO %DATE% - %TIME% End of process
 ECHO ---------------------------------------------------------
 
+REM PAUSE
 EXIT
 
 :ErrorPara 

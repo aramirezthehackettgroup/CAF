@@ -3,8 +3,8 @@
 REM ---------------------------------------------------------
 REM The Hackett Group
 REM Author: rjimenez
-REM Date: AUG 2016
-REM LoadDataPBCS.bat
+REM Date: Oct 2016
+REM RunBusinessRulePBCS.bat 
 REM ---------------------------------------------------------
 
 SETLOCAL ENABLEDELAYEDEXPANSION
@@ -29,12 +29,10 @@ ECHO.>> %log_file%
 
 ECHO PBCS url         : %url% >> %log_file%
 ECHO Log file         : %log_file% >> %log_file%
-ECHO Archive folder   : %backupfiledir% >> %log_file%
 ECHO.>> %log_file%
 
 ECHO PBCS url         : %url%
 ECHO Log file         : %log_file%
-ECHO Archive folder   : %backupfiledir%
 ECHO.
 
 SET message="%date% %time% - Login"
@@ -52,76 +50,13 @@ ECHO.
 ECHO.>> %log_file%
 
 
-SET message="%date% %time% - Delete File"
+SET message="%date% %time% - Run Business Rule"
 ECHO %message:"=%
 ECHO %message:"=% >> %log_file%
-CALL %epmautomate_client% deletefile inbox/%filename% >> %log_file%
-IF %ERRORLEVEL% EQU 0 (
-      GOTO:PROCESS
-   ) ELSE IF %ERRORLEVEL% EQU 1 (
-      ECHO Info: No file to delete in INBOX >> %log_file%
-       ECHO Info: No file to delete in INBOX
-      GOTO:PROCESS
-   ) ELSE (
-       CALL :ErrorPara %message% %log_file% 
-       EXIT
-   )
-
-   
-:PROCESS
-ECHO.
-ECHO.>> %log_file%
-SET message="%date% %time% - Upload File"
-ECHO %message:"=%
-ECHO %message:"=% >> %log_file%
-CALL %epmautomate_client% uploadfile %sourcefiledir%\%filename% inbox >> %log_file%
+CALL %epmautomate_client% runbusinessrule %rulename%  >> %log_file%
 IF %ERRORLEVEL% NEQ 0 ( 
 CALL :ErrorPara %message% %log_file% 
-EXIT )
-ECHO.
-ECHO.>> %log_file%
-
-
-SET message="%date% %time% - Load Data"
-ECHO %message:"=%
-ECHO %message:"=% >> %log_file%
-CALL %epmautomate_client% rundatarule %rulename% %startperiod% %endperiod% REPLACE %exportmode%  %filename% >> %log_file%
-IF %ERRORLEVEL% NEQ 0 ( 
-CALL :ErrorPara %message% %log_file% 
-REM EXIT
 )
-ECHO.
-ECHO.>> %log_file%
-
-SET message="%date% %time% - Archive Data file"
-ECHO %message:"=%
-ECHO %message:"=% >> %log_file%
-MOVE %sourcefiledir%\%filename% %backupfiledir% >> %log_file%
-IF %ERRORLEVEL% NEQ 0 ( 
-CALL :ErrorPara %message% %log_file% 
-EXIT )
-ECHO.
-ECHO.>> %log_file%
-
-SET message="%date% %time% - Rename and Archived Input file"
-ECHO %message:"=%
-ECHO %message:"=% >> %log_file%
-FOR /f "tokens=1,2 delims=." %%a IN ("%filename%") do (
-SET file_base=%%a
-SET extn=%%b
-)
-
-
-SET timestamp=%date:~4,2%_%date:~7,2%_%date:~10,4%_%time:~0,2%%time:~3,2%%
-SET timestamp=%timestamp: =0%
-
-REN %backupfiledir%\%filename% %file_base%_%timestamp%.%extn% >> %log_file%
-
-IF %ERRORLEVEL% NEQ 0 ( 
-CALL :ErrorPara %message% %log_file% 
-EXIT )
-ECHO Archive file name : %file_base%_%timestamp%.%extn%
-ECHO Archive file name : %file_base%_%timestamp%.%extn% >> %log_file%
 ECHO.
 ECHO.>> %log_file%
 
@@ -147,15 +82,15 @@ ECHO ---------------------------------------------------------
 ECHO %DATE% - %TIME% End of process
 ECHO ---------------------------------------------------------
 
-REM PAUSE
+PAUSE
 EXIT
-
 
 :ErrorPara 
 ECHO.
 ECHO ---------------------------------------------------------
 ECHO Step Failed : %~1 with ErrorCode# %ERRORLEVEL%
 ECHO Logging Out. Go to %url% for details.
+ECHO 
 ECHO ---------------------------------------------------------
 ECHO.
 ECHO. >> %~2

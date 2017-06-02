@@ -51,6 +51,7 @@ EXIT )
 ECHO.
 ECHO.>> %log_file%
 
+
 SET message="%date% %time% - Export Snapshot %snapshotname%"
 ECHO %message:"=%
 ECHO %message:"=% >> %log_file%
@@ -81,27 +82,6 @@ EXIT )
 ECHO.
 ECHO.>> %log_file%
 
-SET message="%date% %time% - Rename and Archived Input file"
-ECHO %message:"=%
-ECHO %message:"=% >> %log_file%
-FOR /f "tokens=1,2 delims=." %%a IN ("%filename%") do (
-SET file_base=%%a
-SET extn=%%b
-)
-
-SET timestamp=%date:~4,2%_%date:~7,2%_%date:~10,4%_%time:~0,2%%time:~3,2%%
-SET timestamp=%timestamp: =0%
-
-REN %targetdir%\%filename% %file_base%_%timestamp%.%extn%>> %log_file%
-
-IF %ERRORLEVEL% NEQ 0 ( 
-CALL :ErrorPara %message% %log_file% 
-EXIT )
-ECHO Archive file name : %file_base%_%timestamp%.%extn%
-ECHO Archive file name : %file_base%_%timestamp%.%extn% >> %log_file%
-ECHO.
-ECHO.>> %log_file%
-
 
 SET message="%date% %time% - Logout"
 ECHO ---------------------------------------------------------
@@ -125,6 +105,7 @@ ECHO ---------------------------------------------------------
 ECHO %DATE% - %TIME% End of process
 ECHO ---------------------------------------------------------
 
+PAUSE
 EXIT
 
 :ErrorPara 
@@ -145,4 +126,3 @@ ECHO. >> %~2
 powershell %batch_dir%\sendEmail.ps1 -email %email% -attachment %log_file% -snapshotname %snapshotname% -url %url%
 
 EXIT
-

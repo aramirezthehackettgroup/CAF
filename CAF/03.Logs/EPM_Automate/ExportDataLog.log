@@ -1,0 +1,23 @@
+
+--------------------------------------------------------- 
+Fri 09/23/2016 - 17:35:22.46 Start of process 
+--------------------------------------------------------- 
+
+PBCS url         : https://thgpbcs-thg24621.pbcs.us2.oraclecloud.com 
+Log file         : C:\CAF\03.Logs\EPM_Automate\ExportDataLog.log 
+Outbox folder    : C:\CAF 
+
+--------------------------------------------------------- 
+Fri 09/23/2016 17:35:22.47 - Login 
+--------------------------------------------------------- 
+Login successful
+
+Fri 09/23/2016 17:35:24.84 - Export Data 
+Processing...
+EPMAT-1:Command Failed to execute. The parameter location is invalid.
+ 
+--------------------------------------------------------- 
+Step Failed : Fri 09/23/2016 17:35:24.84 - Export Data with ErrorCode# 1 
+Logging Out. Go to https://thgpbcs-thg24621.pbcs.us2.oraclecloud.com for details. 
+--------------------------------------------------------- 
+ 

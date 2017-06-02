@@ -1,1 +1,1 @@
-epmautomate encrypt Hackett01 myKey passwordFile.epw
+epmautomate encrypt yourpasswordhere myKey passwordFile.epw

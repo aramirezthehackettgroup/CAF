@@ -1,0 +1,28 @@
+
+--------------------------------------------------------- 
+Fri 11/04/2016 - 16:16:23.35 Start of process 
+--------------------------------------------------------- 
+
+PBCS url         : https://thgpbcs-thg24621.pbcs.us2.oraclecloud.com 
+Log file         : C:\CAF\03.Logs\EPM_Automate\ResetServiceLog.log 
+
+--------------------------------------------------------- 
+Fri 11/04/2016 16:16:23.37 - Login 
+--------------------------------------------------------- 
+Login successful
+
+Fri 11/04/2016 16:16:29.73 - Reset Service 
+Are you sure you want to restart the service instance? (yes/no): [Press Enter] 
+Are you sure you want to restart the service instance (yes/no): no ?[Press Enter] 
+Processing...
+Retrieving status...
+resetservice completed successfully
+
+--------------------------------------------------------- 
+Fri 11/04/2016 16:23:47.70 - Logout 
+--------------------------------------------------------- 
+logout completed successfully
+
+--------------------------------------------------------- 
+Fri 11/04/2016 - 16:23:48.35 End of process
+--------------------------------------------------------- 
