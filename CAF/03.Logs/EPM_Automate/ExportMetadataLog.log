@@ -1,35 +1,0 @@
-
---------------------------------------------------------- 
-Thu 08/04/2016 - 16:33:13.21 Start of process 
---------------------------------------------------------- 
-
-PBCS url         : https://thgpbcs-thg24621.pbcs.us2.oraclecloud.com 
-Log file         : C:\CAF\03.Logs\EPM_Automate\ExportMetadataLog.log 
-Outbox folder    : C:\CAF 
-
---------------------------------------------------------- 
-Thu 08/04/2016 16:33:13.23 - Login 
---------------------------------------------------------- 
-Login successful
-
-Thu 08/04/2016 16:33:15.68 - Export Metadata 
-Processing...
-Retrieving status...
-exportmetadata completed successfully
-
-Thu 08/04/2016 16:33:18.79 - Download File AccountExport.zip 
-Processing...
-1 KB received 3 KB received 4 KB received 4 KB received 6 KB received 7 KB received 7 KB received 
-downloadfile completed successfully
-
-Thu 08/04/2016 16:33:21.83 - Move file AccountExport.zip to C:\CAF\02.Outbox\App1\Metadata 
-        1 file(s) moved.
-
---------------------------------------------------------- 
-Thu 08/04/2016 16:33:21.85 - Logout 
---------------------------------------------------------- 
-logout completed successfully
-
---------------------------------------------------------- 
-Thu 08/04/2016 - 16:33:22.68 End of process
---------------------------------------------------------- 
